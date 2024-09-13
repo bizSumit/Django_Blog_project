@@ -1,0 +1,16 @@
+{% extends 'blogs/base.html' %}
+
+{% block body %}
+
+
+<h1> blogs of {{author.name}}</h1>
+Genere : {{author.genere}}
+Email : {{author.email}}
+<hr>
+{% for blog in blogs %}
+<a href="{% url 'detailed_blog' blog.id %}">
+    <h4>{{blog.title}}</h4>
+</a>
+{% endfor %}
+
+{% endblock body %}

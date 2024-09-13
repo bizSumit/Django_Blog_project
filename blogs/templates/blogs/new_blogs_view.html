@@ -1,0 +1,16 @@
+{% extends "blogs/base.html" %}
+
+{% block body %}
+
+<h1> this is new blog create view page </h1>
+
+<form method='POST' enctype="multipart/form-data">
+    {%  csrf_token %}
+
+    {{form.as_p}}
+    <input type="submit" value="Save">
+
+
+</form> 
+
+{% endblock body %}

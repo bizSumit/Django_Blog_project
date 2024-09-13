@@ -1,0 +1,21 @@
+{% extends "blogs/base.html" %}
+
+{% block body %}
+    <h1>This is a Home Page</h1>
+    <hr> 
+    <hr>
+    {% for blog in blogs_key %}
+        <h3>
+			<a href="{% url 'detailed_blog' blog.id %}">
+			{{ blog.title }}
+		</a>
+        <br>{{ blog.date }}
+	</h3>
+        Author : {{ blog.author }}
+        <p>{{ blog.blog_text|truncatechars:150 }}</p>
+        <hr>
+    {% endfor %}
+
+
+{% endblock body %}
+

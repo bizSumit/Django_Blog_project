@@ -1,0 +1,32 @@
+{% extends 'blogs/base.html' %}
+
+{% block body%}
+<h1> New Blog Page</h1>
+
+<form method="post" action="{% url 'new_blog' %}">
+
+    {% csrf_token %}
+
+<label for="title">Blog Title :</label>
+<input type="text" id="title" name="blog_title"><br><br>
+
+<label for="author">Author:</label>
+
+<select id="author" name="author_id" required>
+    <option selected disabled value="">select author</option>
+    {% for author in all_author %}
+    <option value="{{author.id}}">{{author.name}}</option>
+    {% endfor %}
+</select><br><br>
+
+
+
+
+<label for="blog-text">Blog Text :</label>
+<textarea id="blog-text" cols="30" rows="10" name="blog_text"></textarea>
+<br><br>
+<input type="submit" value="Save">
+
+</form>
+
+{% endblock body %}

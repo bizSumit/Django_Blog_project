@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<a href ="{% url 'index_url'%}">Home</a>
+<a href ="{% url 'blog'%}">Blog</a>
+<a href ="{% url 'about'%}">About</a> 
+<a href ="{% url 'authors' %}">Author</a> 
+<a href ="{% url 'new_blog' %}">+ New Blog</a> 
+<br>
+
+{% if user.is_authenticated %}
+<span>Hi {{user.username }}!</span>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
+</form>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'accounts:register' %}">Register</a>
+{% endif %}
+
+{% if messages %}
+    {%for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+{% endif %}
+
+{% block body %}
+
+{% endblock body %}
+</body>
+</html>

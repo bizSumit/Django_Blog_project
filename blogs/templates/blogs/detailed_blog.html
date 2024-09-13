@@ -1,0 +1,33 @@
+{% extends 'blogs/base.html' %}
+
+{% block body %}
+<h1>{{ blog.title }}</h1>
+Author : <i><a href="{% url 'author_details' author_id=blog.author.id %}">{{ blog.author }}</a></i>
+<p>{{ blog.blog_text }}</p>
+
+{% if blog.image %}
+    <img src="{{ blog.image.url }}">
+    <a href="{{ blog.image.url }}" download>Download</a>
+{% endif %}
+
+<a href="{% url 'edit_blog' blog.pk %}">Edit this Blog</a>
+<a href="{% url 'delete_blog' blog.pk %}">Delete this Blog</a>
+
+<h1>Comments</h1>
+{% for comment in comments %}
+    <div>
+        <strong>{{ comment.name }}</strong> ({{ comment.date }})
+        <p>{{ comment.comment_text }}</p>
+    </div>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+<h2>Add a Comment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Submit Comment</button>
+</form>
+
+{% endblock %}
